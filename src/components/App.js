@@ -9,8 +9,23 @@ class App extends Component {
     super(props);
 
     this.state = {
-      log: []
+      log: [],
+      status: '',
     }
+
+    this.onSubmitHandler = this.onSubmitHandler.bind(this);
+    this.radioButtonHandler = this.radioButtonHandler.bind(this)
+  }
+
+  onSubmitHandler(e) {
+    e.preventDefault();
+      const newDay = this.state.log;
+      newDay.push(this.state.status)
+      this.setState({ log: newDay }, () => console.log('log', this.state.log))
+  }
+
+  radioButtonHandler(e) {
+    this.setState({ status: e.target.value }, () => console.log('Estado', this.state.status))
   }
 
 
@@ -20,7 +35,12 @@ class App extends Component {
         <main>
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/edition' component={Edition} />
+            <Route
+              path='/edition'
+              render={(props) => <Edition
+                onSubmitHandler={this.onSubmitHandler}
+                radioButtonHandler={this.radioButtonHandler}
+              />} />
           </Switch>
         </main>
       </div>
