@@ -8,7 +8,9 @@ class Home extends Component {
         return (
             <div>
                 <Link to="/edition">+</Link>
-                <FaceList />
+                <FaceList 
+                log={this.props.log}
+                />
             </div>
         );
     }

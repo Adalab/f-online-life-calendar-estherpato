@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import '../stylesheets/Edition.css';
 
 class Edition extends Component {
@@ -46,21 +47,24 @@ class Edition extends Component {
                     :(
                 </label>
 
-                <label
-                    htmlFor="message"
-                    name="message"
-                >
-                    Mensaje
+                <div >
+                    <label
+                        htmlFor="message"
+                        name="message"
+                    >
+                        Mensaje
                 </label>
-                <input
-                    id="message"
-                    type="text"
-                    name="message"
-                    placeholder="¿Por qué es un buen día?"
-                />
-
-                <button type="submit">Aceptar</button>
-                <button type="reset">Cancelar</button>
+                    <input
+                        id="message"
+                        type="text"
+                        name="message"
+                        placeholder="¿Por qué es un buen día?"
+                    />
+                </div>
+                {/* <Link to="/"> */}
+                    <button type="submit"><Link to="/">Aceptar</Link></button>
+                    <button type="reset"><Link to="/">Cancelar</Link></button>
+                {/* </Link> */}
             </form>
         );
     }

@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      log: [],
+      log: JSON.parse(localStorage.getItem("log")) || [],
       status: '',
     }
 
@@ -17,15 +17,25 @@ class App extends Component {
     this.radioButtonHandler = this.radioButtonHandler.bind(this)
   }
 
+  componentDidUpdate(prevState) {
+    if (this.state.log !== prevState.log) {
+      console.log('heyy')
+      localStorage.setItem("log", JSON.stringify(this.state.log));
+    }
+  }
+
   onSubmitHandler(e) {
     e.preventDefault();
-      const newDay = this.state.log;
-      newDay.push(this.state.status)
-      this.setState({ log: newDay }, () => console.log('log', this.state.log))
+    const newDay = this.state.log;
+    newDay.push(this.state.status)
+    this.setState({
+      log: newDay,
+      status: '',
+    })
   }
 
   radioButtonHandler(e) {
-    this.setState({ status: e.target.value }, () => console.log('Estado', this.state.status))
+    this.setState({ status: e.target.value })
   }
 
 
@@ -34,7 +44,11 @@ class App extends Component {
       <div>
         <main>
           <Switch>
-            <Route exact path='/' component={Home} />
+            <Route exact path='/'
+              render={(props) => <Home
+                log={this.state.log}
+              />}
+            />
             <Route
               path='/edition'
               render={(props) => <Edition
