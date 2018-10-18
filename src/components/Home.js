@@ -7,9 +7,10 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <Link to="/edition">+</Link>
+                <Link to="/edition" className="add-button">+</Link>
                 <FaceList 
                 log={this.props.log}
+                status={this.props.status}
                 />
             </div>
         );

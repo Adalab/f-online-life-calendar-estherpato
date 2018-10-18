@@ -1,0 +1,9 @@
+.add-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 40px;
+}

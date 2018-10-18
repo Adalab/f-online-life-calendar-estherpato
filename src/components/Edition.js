@@ -1,71 +1,88 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import '../stylesheets/Edition.css';
 
 class Edition extends Component {
     render() {
-        const { onSubmitHandler, radioButtonHandler } = this.props;
+        const {
+            onSubmitHandler,
+            radioButtonHandler,
+            inputDateHandler,
+            cancelButtonHandler,
+            status
+        } = this.props;
+        let messageClass = status === ':)' ? null : 'hidden-message';
+
         return (
-            <form onSubmit={onSubmitHandler}>
-                <label
-                    htmlFor="date"
-                    name="date"
+            <Fragment>
+                <form
+                    onSubmit={onSubmitHandler}
+                    className='form-container'
                 >
-                    Fecha
-                </label>
-                <input
-                    type="date"
-                    name="date"
-                    id="date"
-                />
-
-                <label name="status">Estado</label>
-                <label
-                    htmlFor="happy"
-                    name="status"
-                >
-                    <input
-                        type="radio"
-                        name="status"
-                        id="happy"
-                        value=":)"
-                        onChange={radioButtonHandler}
-                    />
-                    :)
-                </label>
-                <label
-                    htmlFor="sad"
-                    name="status"
-                >
-                    <input
-                        type="radio"
-                        name="status"
-                        id="sad"
-                        value=":("
-                        onChange={radioButtonHandler}
-                    />
-                    :(
-                </label>
-
-                <div >
                     <label
-                        htmlFor="message"
-                        name="message"
+                        htmlFor="date"
+                        name="date"
                     >
-                        Mensaje
+                        Fecha *
                 </label>
                     <input
-                        id="message"
-                        type="text"
-                        name="message"
-                        placeholder="¿Por qué es un buen día?"
+                        type="date"
+                        name="date"
+                        id="date"
+                        onChange={inputDateHandler}
+                        required
                     />
-                </div>
-                {/* <Link to="/"> */}
-                    <button type="submit"><Link to="/">Aceptar</Link></button>
-                    <button type="reset"><Link to="/">Cancelar</Link></button>
-                {/* </Link> */}
-            </form>
+
+                    <label name="status">Estado *</label>
+                    <label
+                        htmlFor="happy"
+                        name="status"
+                    >
+                        <input
+                            type="radio"
+                            name="status"
+                            id="happy"
+                            value=":)"
+                            onChange={radioButtonHandler}
+                            required
+                        />
+                        :)
+                </label>
+                    <label
+                        htmlFor="sad"
+                        name="status"
+                    >
+                        <input
+                            type="radio"
+                            name="status"
+                            id="sad"
+                            value=":("
+                            onChange={radioButtonHandler}
+                        />
+                        :(
+                </label>
+
+                    <div className={messageClass}>
+                        <label
+                            htmlFor="message"
+                            name="message"
+                        >
+                            Mensaje
+                </label>
+                        <input
+                            id="message"
+                            type="text"
+                            name="message"
+                            placeholder="¿Por qué es un buen día?"
+                        />
+                    </div>
+                    <button type="submit" className="form-btn accept-btn">Aceptar</button>
+                </form>
+                <button onClick={cancelButtonHandler}
+                    className="form-btn cancel-btn"
+                >Cancelar</button>
+                <Link to="/" className="form-btn back-btn">Volver</Link>
+            </Fragment>
         );
     }
 }
